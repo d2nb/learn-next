@@ -11,6 +11,8 @@
   "author": "d2nb",
   "license": "MIT",
   "dependencies": {
+    "ahooks": "^3.7.6",
+    "axios": "^1.3.5",
     "next": "^13.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

@@ -1,9 +1,33 @@
-function HomePage() {
+import { useState } from 'react';
+import { useMount } from 'ahooks';
+import { getPosts, Post } from '@/api/posts';
+import Link from 'next/link';
+
+function Page() {
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  const onMount = async () => {
+    const { list } = await getPosts();
+    setPosts(list);
+  };
+
+  useMount(() => {
+    onMount();
+  });
+
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <>
+      <ul>
+        {posts?.map((post) => (
+          <li key={post.id}>
+            <Link href={`/posts/${post.id}`} prefetch={false}>
+              {post.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 
-export default HomePage;
+export default Page;
